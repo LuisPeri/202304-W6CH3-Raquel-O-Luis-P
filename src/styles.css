@@ -2,6 +2,7 @@ body {
   background-color: #b9540c;
   overflow: hidden;
 }
+
 .characters-list {
   flex-wrap: nowrap;
   max-width: 100%;
@@ -27,6 +28,7 @@ body {
   background-color: #331c0e;
   color: #fff;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  display: flex;
 }
 .character__overlay {
   border-radius: 0.25rem;
@@ -39,7 +41,7 @@ body {
   background-color: rgba(0, 0, 0, 0.9);
   color: #fff;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   opacity: 0;
   pointer-events: none;
@@ -95,4 +97,8 @@ body {
   position: absolute;
   right: 5px;
   top: 5px;
+}
+
+ul {
+  display: flex;
 }
