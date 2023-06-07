@@ -2,9 +2,15 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { AllCharacters } from "../models/characters";
 import { ApiRepository } from "../../core/services/api.repository";
 import { consoleError } from "../../core/services/errors";
+import { useSelector, useDispatch } from "react-redux";
+import { AppDispatch, RootState } from "../../core/store/store";
 
 export function useCharacters() {
-  const [characters, setCharacters] = useState<AllCharacters[]>([]);
+  const { AllCharacters } = useSelector(
+    (state: RootState) => state.AllCharacters
+  );
+  const dispatch: AppDispatch = useDispatch();
+
   const characterUrl = "http://localhost:3000/characters/";
 
   const repo: ApiRepository<AllCharacters> = useMemo(
@@ -12,10 +18,13 @@ export function useCharacters() {
     []
   );
 
-  const handleLoad = useCallback(async () => {
-    const loadedCharacter = await repo.getAll();
-    setCharacters(loadedCharacter);
-  }, [repo]);
+  const handleLoad = useCallback(
+    async (character) => {
+      const loadedCharacter = await repo.getAll();
+      setCharacters(loadedCharacter);
+    },
+    [repo]
+  );
 
   useEffect(() => {
     handleLoad();
